@@ -31,3 +31,8 @@
     transform: rotate(360deg);
   }
 }
+
+
+.form-adp > * {
+  flex-grow: 1;
+}
