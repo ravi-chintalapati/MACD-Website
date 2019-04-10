@@ -45,7 +45,7 @@ export class request extends React.Component {
             { label: "No. of Controls", name: "number_controls" },
             { label: "Annual Revenue $ ", name: "annual_revenue" }
         ]
-        return <Card style={{ padding: 10, margin: "auto", maxWidth: 600 }}>
+        return <Card style={{ padding: 10, margin: "auto", maxWidth: 650 }}>
             <CardContent>
                 <Typography variant='body3' style={{ marginBottom: 14 }}>
                     For a new custom program
