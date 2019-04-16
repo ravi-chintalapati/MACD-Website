@@ -13,16 +13,6 @@ import StarIcon from '@material-ui/icons/StarBorder';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Logo from './logo.png';
-import { request } from './custom-request';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import Home from './home';
-import { Album } from './Album';
-import { documentation } from './documentation';
-import { faq } from './faq';
-import { about } from './about';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 
 const styles = theme => ({
   '@global': {
@@ -125,54 +115,76 @@ const footers = [
   },
 ];
 
-class Pricing extends React.Component {
-  componentDidMount() {
-    fetch("http://localhost:8888/kishore").then(d=>d.text()).then(d=>console.log(d));
-  }
+export class Album extends React.Component {
   render(){
-  const { classes } = this.props;
-  
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
     <React.Fragment>
-      <BrowserRouter>
-      <div className={classes.root}>
-      <CssBaseline/>
-      <AppBar position="static" color="default" className={classes.appBar}>
+      <CssBaseline />
+      <AppBar position="static" color="default" className={Album.appBar}>
         <Toolbar>
-          <img src={Logo} style={{ marginRight: 20 }} height={30} width={70} />
-          <Typography variant="h5" color="inherit" noWrap className={classes.toolbarTitle}>
-            Major Accounts Custom Development
+          <Typography variant="h6" color="inherit" noWrap className={Album.toolbarTitle}>
+            Company name
           </Typography>
-          
-          <Link style={{ textDecoration: "none" }} to="/submit">
-              <Button style={{marginRight: 10}}>Request a custom</Button>
-                </Link>
-          <Button style={{marginRight: 10}}>Enterprise</Button>
-          <Button style={{marginRight: 10}}>Support</Button>
+          <Button>Features</Button>
+          <Button>Enterprise</Button>
+          <Button>Support</Button>
           <Button color="primary" variant="outlined">
             Login
           </Button>
         </Toolbar>
       </AppBar>
-      <main className={classes.layout}>
-
-        <main className={classes.content} style={{ marginTop: 60 }}>
-                <Switch>
-                  <Route path="/home" component={Home} />
-                  <Route path="/submit" component={request} />
-                  <Route path="/documentation" component={documentation} />
-                  <Route path="/faq" component={faq} />
-                  <Route path="/about" component={about} />
-                  <Route path="/album" component={Album} />
-                  <Route component={Home} />
-                </Switch>
-          </main>
-
+      <main className={Album.layout}>
+        {/* Hero unit */}
+        <div className={Album.heroContent}>
+          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            Pricing
+          </Typography>
+          <Typography variant="h6" align="center" color="textSecondary" component="p">
+            Quickly build an effective pricing table for your potential customers with this layout.
+            It&apos;s built with default Material-UI components with little customization.
+          </Typography>
+        </div>
+        {/* End hero unit */}
+        <Grid container spacing={40} alignItems="flex-end">
+          {tiers.map(tier => (
+            // Enterprise card is full width at sm breakpoint
+            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
+              <Card>
+                <CardHeader
+                  title={tier.title}
+                  subheader={tier.subheader}
+                  titleTypographyProps={{ align: 'center' }}
+                  subheaderTypographyProps={{ align: 'center' }}
+                  action={tier.title === 'Pro' ? <StarIcon /> : null}
+                  className={Album.cardHeader}
+                />
+                <CardContent>
+                  <div className={Album.cardPricing}>
+                    <Typography component="h2" variant="h3" color="textPrimary">
+                      ${tier.price}
+                    </Typography>
+                    <Typography variant="h6" color="textSecondary">
+                      /mo
+                    </Typography>
+                  </div>
+                  {tier.description.map(line => (
+                    <Typography variant="subtitle1" align="center" key={line}>
+                      {line}
+                    </Typography>
+                  ))}
+                </CardContent>
+                <CardActions className={Album.cardActions}>
+                  <Button fullWidth variant={tier.buttonVariant} color="primary">
+                    {tier.buttonText}
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </main>
-
       {/* Footer */}
-      <footer className={classNames(classes.footer, classes.layout)}>
+      <footer className={classNames(Album.footer, Album.layout)}>
         <Grid container spacing={32} justify="space-evenly">
           {footers.map(footer => (
             <Grid item xs key={footer.title}>
@@ -189,16 +201,13 @@ class Pricing extends React.Component {
         </Grid>
       </footer>
       {/* End footer */}
-      </div>
-      </BrowserRouter>
     </React.Fragment>
-    </MuiPickersUtilsProvider>
   );
 }
 }
 
-Pricing.propTypes = {
+Album.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Pricing);
+export default withStyles(styles)(Album);
