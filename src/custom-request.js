@@ -25,6 +25,19 @@ export class request extends React.Component {
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
+    submit = (e) => {
+        e.preventDefault();
+        const json = {
+            option: this.state.option
+        };
+        fetch("http://localhost:8888/apirequest", {
+            body: JSON.stringify(json),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST"
+        }).then(d => d.text()).then(d => console.log("RESPONSE : ", d))
+    }
     render() {
 
         const { selectedDate } = this.state;
@@ -59,7 +72,7 @@ export class request extends React.Component {
 
                 <Divider style={{ marginBottom: 20 }} />
 
-                <form style={{ maxWidth: 900, margin: "auto" }}>
+                <form style={{ maxWidth: 900, margin: "auto" }} onSubmit={this.submit}>
                     {config.map((el, i) => {
                         switch (el.type) {
                             case "date":
@@ -221,7 +234,7 @@ export class request extends React.Component {
 
                     <Divider style={{ marginBottom: 20 }} />
 
-                    <FormControl style={{ marginTop: 5, marginBottom: 10, marginRight: 50}} autoComplete='off' >
+                    <FormControl style={{ marginTop: 5, marginBottom: 10, marginRight: 50 }} autoComplete='off' >
                         <FormLabel component="legend" shrink htmlFor="pay_frequency">Payroll Frequency</FormLabel>
                         <Select
                             value={this.state.pay_frequency}
@@ -239,7 +252,7 @@ export class request extends React.Component {
                             <MenuItem value={5}>Other</MenuItem>
                         </Select>
                     </FormControl>
-                    
+
                     <FormControl style={{ marginTop: 5, marginBottom: 10 }} autoComplete='off' >
                         <FormLabel component="legend" shrink htmlFor="req_frequency">Request Frequency</FormLabel>
                         <Select
@@ -258,7 +271,7 @@ export class request extends React.Component {
                             <MenuItem value={5}>Other</MenuItem>
                         </Select>
                     </FormControl>
-                    
+
                     {payroll_info.map((el, i) => {
                         return <TextField key={i}
                             id="company-name"
@@ -267,7 +280,7 @@ export class request extends React.Component {
                             name={el.name}
                             type={el.type ? el.type : "text"}
                             autoComplete="off"
-                                />;
+                        />;
                     })}
 
                     <FormControl component="fieldset">
@@ -300,61 +313,61 @@ export class request extends React.Component {
                         </RadioGroup>
                     </FormControl>
 
-                <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
-                    <b>Business Scope and Objectives</b>
+                    <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
+                        <b>Business Scope and Objectives</b>
+                    </Typography>
+
+                    <Divider style={{ marginBottom: 20 }} />
+
+                    <Typography variant='body4' style={{ marginBottom: 14 }}>
+                        Please define the following :<br />
+                        Scope and Objectives (please enumerate and be specific):
                 </Typography>
 
-                <Divider style={{ marginBottom: 20 }} />
-
-                <Typography variant='body4' style={{ marginBottom: 14 }}>
-                    Please define the following :<br/>
-                    Scope and Objectives (please enumerate and be specific): 
-                </Typography>
-
-                <TextField 
-                    id="scope"
-                    style={{ display: "flex", marginBottom: 20 }}
-                    label={""}
-                    name={"scope"}
-                    type={"text"}
-                    autoComplete="off"
-                    variant="outlined"
-                    multiline={true}
-                    rows={5}
-                    rowsMax={10}
+                    <TextField
+                        id="scope"
+                        style={{ display: "flex", marginBottom: 20 }}
+                        label={""}
+                        name={"scope"}
+                        type={"text"}
+                        autoComplete="off"
+                        variant="outlined"
+                        multiline={true}
+                        rows={5}
+                        rowsMax={10}
                     />
 
-                <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
-                    <b>Functional Requirements</b>
+                    <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
+                        <b>Functional Requirements</b>
+                    </Typography>
+
+                    <Divider style={{ marginBottom: 20 }} />
+
+                    <Typography variant='body4' style={{ marginBottom: 14 }}>
+                        Define the functional requirements (please be very specific):
                 </Typography>
 
-                <Divider style={{ marginBottom: 20 }} />
-
-                <Typography variant='body4' style={{ marginBottom: 14 }}>
-                    Define the functional requirements (please be very specific):
-                </Typography>
-
-                <TextField 
-                    id="functional_scope"
-                    style={{ display: "flex", marginBottom: 20 }}
-                    label={""}
-                    name={"functional_scope"}
-                    type={"text"}
-                    autoComplete="off"
-                    variant="outlined"
-                    multiline={true}
-                    rows={5}
-                    rowsMax={10}
+                    <TextField
+                        id="functional_scope"
+                        style={{ display: "flex", marginBottom: 20 }}
+                        label={""}
+                        name={"functional_scope"}
+                        type={"text"}
+                        autoComplete="off"
+                        variant="outlined"
+                        multiline={true}
+                        rows={5}
+                        rowsMax={10}
                     />
 
-                <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
-                    <b>Special Calcs</b>
-                </Typography>
+                    <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
+                        <b>Special Calcs</b>
+                    </Typography>
 
-                <Divider style={{ marginBottom: 20 }} />
+                    <Divider style={{ marginBottom: 20 }} />
 
-                <Typography variant='body4' style={{ marginBottom: 14 }}>
-                       If request is for an Autopay Custom Net:
+                    <Typography variant='body4' style={{ marginBottom: 14 }}>
+                        If request is for an Autopay Custom Net:
                 </Typography>
 
                     <FormControl component="fieldset">
@@ -387,16 +400,16 @@ export class request extends React.Component {
                         </RadioGroup>
                     </FormControl>
 
-                <Typography variant='body4' style={{ marginBottom: 14 }}>
-                    If answer is Yes, please list the logic of these Special Calcs in the Functional Requirements section above. 
-                    This logic must be in English, and not represented in Special Calc Screen format.
+                    <Typography variant='body4' style={{ marginBottom: 14 }}>
+                        If answer is Yes, please list the logic of these Special Calcs in the Functional Requirements section above.
+                        This logic must be in English, and not represented in Special Calc Screen format.
                 </Typography>
 
-                <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
-                    <b>Custom Report</b>
-                </Typography>
+                    <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
+                        <b>Custom Report</b>
+                    </Typography>
 
-                <Divider style={{ marginBottom: 20 }} />
+                    <Divider style={{ marginBottom: 20 }} />
 
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Is a custom report required ?</FormLabel>
@@ -413,18 +426,18 @@ export class request extends React.Component {
                         </RadioGroup>
                     </FormControl>
 
-                <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
-                    <b>Attachments</b>
-                </Typography>
+                    <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
+                        <b>Attachments</b>
+                    </Typography>
 
-                <Divider style={{ marginBottom: 20 }} />
+                    <Divider style={{ marginBottom: 20 }} />
 
-                <Typography variant='body6' style={{ marginTop: 50 }}>
-                    M/A Custom Development<br/>
-                    Copyright © 2002  ADP, LLC.  All rights reserved.<br/> 
-                    Revised: April 09, 2019<br/>
-                </Typography>
-
+                    <Typography variant='body6' style={{ marginTop: 50 }}>
+                        M/A Custom Development<br />
+                        Copyright © 2002  ADP, LLC.  All rights reserved.<br />
+                        Revised: April 09, 2019<br />
+                    </Typography>
+                    <input type="submit" />
                 </form>
             </CardContent>
         </Card>
