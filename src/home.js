@@ -2,26 +2,13 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import StarIcon from '@material-ui/icons/StarBorder';
-import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
-import Logo from './logo.png';
-import { request } from './custom-request';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import { Album } from './Album';
-import { documentation } from './documentation';
-import { faq } from './faq';
-import { about } from './about';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 
 const styles = theme => ({
   '@global': {
@@ -73,35 +60,22 @@ const styles = theme => ({
 
 const tiers = [
   {
-    title: 'Free',
-    price: '0',
-    description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
-    buttonText: 'Sign up for free',
+    title: 'Work Flow',
+    description: ['Request Lifecyle', 'Defect Lifecycle', 'What we Do'],
+    buttonText: 'Know more',
     buttonVariant: 'outlined',
   },
   {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '15',
-    description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
-    ],
-    buttonText: 'Get started',
+    title: 'Custom Calendar',
+    subheader: 'Deployment Schedules',
+    description: ['Black Out Dates', 'Payroll Release Dates', 'Holidays'],
+    buttonText: 'Know More',
     buttonVariant: 'contained',
   },
   {
-    title: 'Enterprise',
-    price: '30',
-    description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
-    ],
-    buttonText: 'Contact us',
+    title: 'Request Status',
+    description: ['Requests in Progress', 'Requests in Backlog', 'Blocked Requests'],
+    buttonText: 'Know More',
     buttonVariant: 'outlined',
   },
 ];
@@ -113,8 +87,6 @@ export class Home extends React.Component {
         const { classes } = this.props;
   
         return (
-        // <Card>
-            // <CardContent>
                 <div style={{ textAlign: "center" }}>
                 <main className={classes.layout}>
                     {/* Hero unit */}
@@ -140,14 +112,6 @@ export class Home extends React.Component {
                                         className={classes.cardHeader}
                                     />
                                     <CardContent>
-                                        <div className={classes.cardPricing}>
-                                            <Typography component="h2" variant="h3" color="textPrimary">
-                                                ${tier.price}
-                                            </Typography>
-                                            <Typography variant="h6" color="textSecondary">
-                                                /mo
-                                            </Typography>
-                                        </div>
                                         {tier.description.map(line => (
                                             <Typography variant="subtitle1" align="center" key={line}>
                                                 {line}
@@ -155,7 +119,7 @@ export class Home extends React.Component {
                                         ))}
                                     </CardContent>
                                     <CardActions className={classes.cardActions}>
-                                        <Button fullWidth variant={tier.buttonVariant} color="primary">
+                                        <Button fullWidth variant={tier.buttonVariant}>
                                             {tier.buttonText}
                                         </Button>
                                     </CardActions>
@@ -171,8 +135,6 @@ export class Home extends React.Component {
                     contact <a href="mailto:rajeshwar.akella@adp.com?Subject=Website%20Feedback" target="_top">Custom Majors</a>
                 </Typography>
             </div>
-            // </CardContent>
-        // </Card>
         )
     }
 }

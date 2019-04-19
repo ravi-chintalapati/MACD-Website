@@ -15,11 +15,17 @@ export class request extends React.Component {
     state = {
         // The first commit of Material-UI
         selectedDate: new Date(),
-        option: "   "
+        option: "   ",
+        values: { date: new Date() }
     };
 
-    handleDateChange = date => {
-        this.setState({ selectedDate: date });
+    handleDateChange = name => date => {
+        this.setState({
+            values: {
+                ...this.state.values,
+                [name]: date
+            }
+        });
     };
 
     handleChange = event => {
@@ -28,7 +34,7 @@ export class request extends React.Component {
     submit = (e) => {
         e.preventDefault();
         const json = {
-            option: this.state.option
+            ...this.state.values
         };
         fetch("http://localhost:8888/apirequest", {
             body: JSON.stringify(json),
@@ -37,6 +43,14 @@ export class request extends React.Component {
             },
             method: "POST"
         }).then(d => d.text()).then(d => console.log("RESPONSE : ", d))
+    };
+    onChange = (name) => e => {
+        this.setState({
+            values: {
+                ...this.state.values,
+                [name]: e.target.value
+            }
+        })
     }
     render() {
 
@@ -45,11 +59,17 @@ export class request extends React.Component {
         const config = [
             { label: "Company Name", name: "company_name" },
             { label: "Processing Region", name: "processing_region" },
+            { label: "Company Codes", name: "company_codes" },
             { label: "ADP Contact Person", name: "contact_name" },
             { label: "ADP Contact Title", name: "contact_title" },
             { label: "ADP Contact Phone #", name: "contact_phone" },
             { label: "Email Id", name: "contact_email" },
-            { label: "Date", name: "date", type: "date" }
+            { label: "Date", name: "date", type: "date" },
+            {
+                label: "Select", name: "prog_type", type: "select", options: [
+                    { value: "new", label: "New Program" }, { value: "existing", label: "Modification to Existing Program" }, { value: "other", label: "Other" }
+                ]
+            }
         ]
 
         const payroll_info = [
@@ -86,58 +106,40 @@ export class request extends React.Component {
                                         console.log(val);
                                         return format(val, "MMMM do yyyy")
                                     }}
-                                    value={selectedDate}
-                                    onChange={this.handleDateChange}
+                                    value={this.state.values[el.name]}
+                                    onChange={this.handleDateChange(el.name)}
                                 />
+                            case "select":
+                                return <FormControl key={i} component="fieldset">
+                                    <FormLabel component="legend">Select an Option</FormLabel>
+                                    <RadioGroup
+                                        value={this.state.values[el.name]} onChange={this.onChange(el.name)}
+                                        aria-label="program"
+                                        row>
+                                        {el.options.map(v => (
+                                            <FormControlLabel key={v.value} value={v.value} control={<Radio />} label={v.label} />
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
                             default:
                                 return <TextField key={i}
-                                    id="company-name"
                                     style={{ display: "flex", marginBottom: 20 }}
                                     label={el.label}
                                     name={el.name}
+                                    value={this.state.values[el.name]}
+                                    onChange={this.onChange(el.name)}
                                     type={el.type ? el.type : "text"}
                                 />;
                         }
                     })}
 
-                    <div>
-                        <FormControl component="fieldset" style={{ flexGrow: 1, flexBasis: "50%" }}>
-                            <FormLabel component="legend">An Existing Company ?</FormLabel>
-                            <RadioGroup
-                                value={this.state.option} onChange={(e) => {
-                                    this.setState({
-                                        option: e.target.value
-                                    })
-                                }}
-                                aria-label="Company_with_ADP"
-                                row>
-                                <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                                <FormControlLabel value="No" control={<Radio />} label="No" />
-                            </RadioGroup>
-                        </FormControl>
-                    </div>
 
-                    <FormControl component="fieldset">
-                        <FormLabel component="legend">Select an Option</FormLabel>
-                        <RadioGroup
-                            value={this.state.option1} onChange={(e) => {
-                                this.setState({
-                                    option1: e.target.value
-                                })
-                            }}
-                            aria-label="program"
-                            row>
-                            <FormControlLabel value="new" control={<Radio />} label="New Program" />
-                            <FormControlLabel value="existing" control={<Radio />} label="Modification to Existing Program" />
-                            <FormControlLabel value="other" control={<Radio />} label="Other" />
-                        </RadioGroup>
-                    </FormControl>
 
-                    {this.state.option1 === "new" && <div><FormControl style={{ marginTop: 5, marginBottom: 10 }} autoComplete='off' >
+                    {this.state.values["prog_type"] === "new" && <div><FormControl style={{ marginTop: 5, marginBottom: 10 }} autoComplete='off' >
                         <FormLabel component="legend" shrink htmlFor="program_type1">Select One</FormLabel>
                         <Select
-                            value={this.state.program_type1}
-                            onChange={this.handleChange}
+                            value={this.state.values["program_type1"]}
+                            onChange={this.onChange("program_type1")}
                             inputProps={{
                                 shrink: false,
                                 name: 'program_type1',
@@ -147,13 +149,25 @@ export class request extends React.Component {
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            <MenuItem value={1}>Custom Check</MenuItem>
-                            <MenuItem value={2}>Custom Net</MenuItem>
-                            <MenuItem value={3}>Custom Register</MenuItem>
+                            <MenuItem value={"Custom Check"}>Custom Check</MenuItem>
+                            <MenuItem value={"Custom Net"}>Custom Net</MenuItem>
+                            <MenuItem value={"Custom Register"}>Custom Register</MenuItem>
                         </Select>
                     </FormControl></div>
                     }
-
+                    <div>
+                        <FormControl component="fieldset" style={{ flexGrow: 1, flexBasis: "50%" }}>
+                            <FormLabel component="legend">An Existing Company ?</FormLabel>
+                            <RadioGroup
+                                value={this.state.values["Company_with_ADP"]}
+                                onChange={this.onChange("Company_with_ADP")}
+                                aria-label="Company_with_ADP"
+                                row>
+                                <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                                <FormControlLabel value="No" control={<Radio />} label="No" />
+                            </RadioGroup>
+                        </FormControl>
+                    </div>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Client Processing Set Up:</FormLabel>
                         <RadioGroup
@@ -162,6 +176,7 @@ export class request extends React.Component {
                                     option2: e.target.value
                                 })
                             }}
+                            onChange={this.onChange("processing")}
                             aria-label="processing"
                             row>
                             <FormControlLabel value="NON-NOS" control={<Radio />} label="Non-NOS" />
@@ -179,6 +194,7 @@ export class request extends React.Component {
                                         option3: e.target.value
                                     })
                                 }}
+                                onChange={this.onChange("PLD")}
                                 aria-label="PLD"
                                 row>
                                 <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
@@ -195,6 +211,7 @@ export class request extends React.Component {
                                     option4: e.target.value
                                 })
                             }}
+                            onChange={this.onChange("LDR")}
                             aria-label="LDR"
                             row>
                             <FormControlLabel value="Dept" control={<Radio />} label="Dept" />
@@ -212,6 +229,7 @@ export class request extends React.Component {
                                         option5: e.target.value
                                     })
                                 }}
+                                onChange={this.onChange("ADP_Mobile")}
                                 aria-label="ADP_Mobile"
                                 row>
                                 <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
@@ -244,12 +262,13 @@ export class request extends React.Component {
                                 name: 'pay_frequency',
                                 id: 'pay_frequency',
                             }}
+                            onChange={this.onChange("pay_frequency")}
                         >
-                            <MenuItem value={1}>Weekly</MenuItem>
-                            <MenuItem value={2}>Bi-Weekly</MenuItem>
-                            <MenuItem value={3}>Semi-Monthly</MenuItem>
-                            <MenuItem value={4}>Monthly</MenuItem>
-                            <MenuItem value={5}>Other</MenuItem>
+                            <MenuItem value={'Weekly'}>Weekly</MenuItem>
+                            <MenuItem value={'Bi-Weekly'}>Bi-Weekly</MenuItem>
+                            <MenuItem value={'Semi-Monthly'}>Semi-Monthly</MenuItem>
+                            <MenuItem value={'Monthly'}>Monthly</MenuItem>
+                            <MenuItem value={'Other'}>Other</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -263,12 +282,13 @@ export class request extends React.Component {
                                 name: 'req_frequency',
                                 id: 'req_frequency',
                             }}
+                            onChange={this.onChange("req_frequency")}
                         >
-                            <MenuItem value={1}>Weekly</MenuItem>
-                            <MenuItem value={2}>Bi-Weekly</MenuItem>
-                            <MenuItem value={3}>Semi-Monthly</MenuItem>
-                            <MenuItem value={4}>Monthly</MenuItem>
-                            <MenuItem value={5}>Other</MenuItem>
+                            <MenuItem value={'Weekly'}>Weekly</MenuItem>
+                            <MenuItem value={'Bi-Weekly'}>Bi-Weekly</MenuItem>
+                            <MenuItem value={'Semi-Monthly'}>Semi-Monthly</MenuItem>
+                            <MenuItem value={'Monthly'}>Monthly</MenuItem>
+                            <MenuItem value={'Other'}>Other</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -280,6 +300,7 @@ export class request extends React.Component {
                             name={el.name}
                             type={el.type ? el.type : "text"}
                             autoComplete="off"
+                            onChange={this.onChange(el.name)}
                         />;
                     })}
 
@@ -291,7 +312,8 @@ export class request extends React.Component {
                                     option6: e.target.value
                                 })
                             }}
-                            aria-label="LPARS"
+                            onChange={this.onChange("Mutli_Regions")}
+                            aria-label="Multi_Regions"
                             row>
                             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                             <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -306,6 +328,7 @@ export class request extends React.Component {
                                     option7: e.target.value
                                 })
                             }}
+                            onChange={this.onChange("Criticality")}
                             aria-label="criticality"
                             row>
                             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
@@ -322,7 +345,7 @@ export class request extends React.Component {
                     <Typography variant='body4' style={{ marginBottom: 14 }}>
                         Please define the following :<br />
                         Scope and Objectives (please enumerate and be specific):
-                </Typography>
+                    </Typography>
 
                     <TextField
                         id="scope"
@@ -335,6 +358,7 @@ export class request extends React.Component {
                         multiline={true}
                         rows={5}
                         rowsMax={10}
+                        onChange={this.onChange("scope")}
                     />
 
                     <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
@@ -358,6 +382,7 @@ export class request extends React.Component {
                         multiline={true}
                         rows={5}
                         rowsMax={10}
+                        onChange={this.onChange("functional_scope")}
                     />
 
                     <Typography variant='h5' style={{ marginTop: 20, marginBottom: 5 }}>
@@ -378,6 +403,7 @@ export class request extends React.Component {
                                     option8: e.target.value
                                 })
                             }}
+                            onChange={this.onChange("calcs")}
                             aria-label="calcs"
                             row>
                             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
@@ -393,6 +419,7 @@ export class request extends React.Component {
                                     option9: e.target.value
                                 })
                             }}
+                            onChange={this.onChange("existing_custom_net")}
                             aria-label="existing_custom_net"
                             row>
                             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
@@ -419,6 +446,7 @@ export class request extends React.Component {
                                     option9: e.target.value
                                 })
                             }}
+                            onChange={this.onChange("custom_report")}
                             aria-label="custom_report"
                             row>
                             <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
@@ -430,16 +458,24 @@ export class request extends React.Component {
                         <b>Attachments</b>
                     </Typography>
 
-                    <Divider style={{ marginBottom: 20 }} />
 
-                    <Typography variant='body6' style={{ marginTop: 50 }}>
-                        M/A Custom Development<br />
-                        Copyright © 2002  ADP, LLC.  All rights reserved.<br />
-                        Revised: April 09, 2019<br />
-                    </Typography>
-                    <input type="submit" />
+                    <form action="/action_page.php">
+                        Select Attachments: <input type="file" name="img" multiple/>
+                    </form>
+
+                            <input type="submit" />
+
+                            <Divider style={{ marginBottom: 20, marginTop: 20 }} />
+
+                            <Typography variant='body6' style={{ marginTop: 50 }}>
+                                M/A Custom Development<br />
+                                Copyright © 2002  ADP, LLC.  All rights reserved.<br />
+                                Revised: April 09, 2019<br />
+                            </Typography>
+
                 </form>
+
             </CardContent>
         </Card>
-    }
+                }
 }
