@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/StarBorder';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -71,6 +70,8 @@ const tiers = [
     description: ['Black Out Dates', 'Payroll Release Dates', 'Holidays'],
     buttonText: 'Know More',
     buttonVariant: 'contained',
+    buttonColor: '#2a6171',
+    textColor: "#FFFFFF",
   },
   {
     title: 'Request Status',
@@ -91,7 +92,7 @@ export class Home extends React.Component {
                 <main className={classes.layout}>
                     {/* Hero unit */}
                     <div className={classes.heroContent}>
-                        <Typography variant="h6" align="center" color="textSecondary" component="p">
+                        <Typography variant="h6" align="center" color="textPrimary" component="p">
                             Quickly build an effective pricing table for your potential customers with this layout.
                             It&apos;s built with default Material-UI components with little customization.
                         </Typography>
@@ -108,8 +109,8 @@ export class Home extends React.Component {
                                         subheader={tier.subheader}
                                         titleTypographyProps={{ align: 'center' }}
                                         subheaderTypographyProps={{ align: 'center' }}
-                                        action={tier.title === 'Pro' ? <StarIcon /> : null}
                                         className={classes.cardHeader}
+                                        
                                     />
                                     <CardContent>
                                         {tier.description.map(line => (
@@ -119,7 +120,7 @@ export class Home extends React.Component {
                                         ))}
                                     </CardContent>
                                     <CardActions className={classes.cardActions}>
-                                        <Button fullWidth variant={tier.buttonVariant}>
+                                        <Button fullWidth variant={tier.buttonVariant} style={{ backgroundColor: tier.buttonColor, color: tier.textColor }}>
                                             {tier.buttonText}
                                         </Button>
                                     </CardActions>

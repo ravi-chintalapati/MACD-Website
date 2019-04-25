@@ -6,6 +6,7 @@ export class documentation extends React.Component {
     render(){ return <Card>
                         <CardContent>
                         <h4>Custom Majors Documentation</h4>
+                        <div><a href='C:\Users\akellara\Desktop\screenshots'>Custom Net</a></div>
                         </CardContent>
                     </Card>
         }

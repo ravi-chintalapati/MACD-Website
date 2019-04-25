@@ -178,7 +178,6 @@ class Pricing extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { inboxOpen } = this.state;
 
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -186,125 +185,145 @@ class Pricing extends React.Component {
           <BrowserRouter>
             <div className={classes.root}>
               <CssBaseline />
-              <AppBar position="absolute" color="default" className={classes.appBar}>
+              <AppBar position="absolute" color="default"  className={classes.appBar}>
                 <Toolbar>
-                  <Link style={{ textDecoration: "none" }} to="/home">
-                    <img src={Logo} style={{ marginRight: 20 }} height={30} width={70} />
-                  </Link>
-                  <Typography variant="h5" color="inherit" noWrap className={classes.toolbarTitle}>
-                    Major Accounts Custom Development
-                  </Typography>
-                  <div className={classes.grow} />
+                    <Link style={{ textDecoration: "none" }} to="/home">
+                      <img src={Logo} style={{ marginRight: 20 }} height={30} width={70} alt='  ' />
+                    </Link>
+                    <Typography variant="h5" color="inherit" noWrap className={classes.toolbarTitle}>
+                      Major Accounts Custom Development
+                    </Typography>
+                    <div className={classes.grow} />
                     <i>Catering to the custom needs of Major Accounts</i>
                 </Toolbar>
               </AppBar>
-              <AppBar position="static" style={{ backgroundColor: '#2a6171' }}>
-                <Toolbar variant="dense">
+                <AppBar position="static" style={{ backgroundColor: '#2a6171' }}>
+                  <Toolbar variant="dense">
 
-                  <Link style={{ textDecoration: "none" }} to="/home">
-                    <Button style={{ marginLeft:30, marginRight: 50, color: "#FFFFFF" }} >Home</Button>
-                  </Link>
+                    <Link style={{ textDecoration: "none" }} to="/home">
+                      <Button style={{ marginLeft: 30, marginRight: 50, color: "#FFFFFF" }} >Home</Button>
+                    </Link>
 
-                  <Link style={{ textDecoration: "none" }} to="/submit">
-                    <Button style={{ marginRight: 50, color: "#FFFFFF" }} >Request a custom</Button>
-                  </Link>
-          
-                  <Button style={{ marginRight: 50, color: "#FFFFFF" }} >
-                    <a href="http://dpopsweb/Main/CA/CreateRequestNoTabs.aspx?pcat=1319AC4" target="_blank" style={{color: '#FFFFFF', textDecoration: "none"}}>
-                      Raise a Defect</a>
-                  </Button>
+                    <Link style={{ textDecoration: "none" }} to="/submit">
+                      <Button style={{ marginRight: 50, color: "#FFFFFF" }} >Request a custom</Button>
+                    </Link>
 
-                  <Link style={{ textDecoration: "none" }} to="/faq">
-                    <Button style={{ marginRight: 50, color: "#FFFFFF" }} >FAQ's</Button>
-                  </Link>
+                    <Button style={{ marginRight: 50, color: "#FFFFFF" }} >
+                      <a href="http://dpopsweb/Main/CA/CreateRequestNoTabs.aspx?pcat=1319AC4" target="_blank" rel="noopener noreferrer" style={{ color: '#FFFFFF', textDecoration: "none" }}>
+                        Raise a Defect</a>
+                    </Button>
 
-                  <Button style={{ marginRight: 50, color: "#FFFFFF" }} onClick={this.handleOpen}>Contact Us</Button>
+                    <Link style={{ textDecoration: "none" }} to="/documentation">
+                      <Button style={{ marginRight: 50, color: "#FFFFFF" }} >Documentation</Button>
+                    </Link>
 
-                  <div className={classes.grow} />
+                    <Link style={{ textDecoration: "none" }} to="/faq">
+                      <Button style={{ marginRight: 50, color: "#FFFFFF" }} >FAQ's</Button>
+                    </Link>
 
-                  <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                      <SearchIcon />
+                    <Button style={{ marginRight: 50, color: "#FFFFFF" }} onClick={this.handleOpen}>Contact Us</Button>
+
+                    <div className={classes.grow} />
+
+                    <div className={classes.search}>
+                      <div className={classes.searchIcon}>
+                        <SearchIcon />
+                      </div>
+                      <InputBase
+                        placeholder="Search…"
+                        classes={{
+                          root: classes.inputRoot,
+                          input: classes.inputInput,
+                        }}
+                      />
                     </div>
-                    <InputBase
-                      placeholder="Search…"
-                      classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                      }}
-                    />
-                  </div>
 
-                </Toolbar>
-              </AppBar>
+                  </Toolbar>
+                </AppBar>
 
-              <main className={classes.layout}>
+                <main className={classes.layout}>
 
-                <main className={classes.content} style={{ marginTop: 60 }}>
-                  <Switch>
-                    <Route path="/home" component={Home} />
-                    <Route path="/submit" component={request} />
-                    <Route path="/documentation" component={documentation} />
-                    <Route path="/faq" component={faq} />
-                    <Route path="/about" component={about} />
-                    <Route path="/album" component={Album} />
-                    <Route component={Home} />
-                  </Switch>
+                  <main className={classes.content} style={{ marginTop: 60 }}>
+                    <Switch>
+                      <Route path="/home" component={Home} />
+                      <Route path="/submit" component={request} />
+                      <Route path="/documentation" component={documentation} />
+                      <Route path="/faq" component={faq} />
+                      <Route path="/about" component={about} />
+                      <Route path="/album" component={Album} />
+                      <Route component={Home} />
+                    </Switch>
+                  </main>
+
                 </main>
-
-              </main>
-              <Dialog
-                open={this.state.open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={this.handleClose}
-                aria-labelledby="alert-dialog-slide-title"
-                aria-describedby="alert-dialog-slide-description"
-              >
-                <DialogTitle id="alert-dialog-slide-title">
-                  {"Contact in case of Emergency : "}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-slide-description">
-                    Lori Colelli Senior Director Roseland, NJ
-                    Sireesha Somayajula Senior Manager Hyderabad, India
-            </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={this.handleClose} color="primary">
-                    Close
+                <Dialog
+                  open={this.state.open}
+                  TransitionComponent={Transition}
+                  keepMounted
+                  onClose={this.handleClose}
+                  aria-labelledby="alert-dialog-slide-title"
+                  aria-describedby="alert-dialog-slide-description"
+                >
+                  <DialogTitle id="alert-dialog-slide-title">
+                    {"Contact in case of Emergency : "}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description">
+                      <div>
+                        <table>
+                          <col width="200" />
+                          <col width="200" />
+                          <tr>
+                            <td>Lori Coleli</td>
+                            <td>Sireesha Somayajula</td>
+                          </tr>
+                          <tr>
+                            <td>Senior Director</td>
+                            <td>Senior Manager</td>
+                          </tr>
+                          <tr>
+                            <td>NJ, Roseland</td>
+                            <td>F9, Hyderabad</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                      Close
             </Button>
-                </DialogActions>
-              </Dialog>
+                  </DialogActions>
+                </Dialog>
 
-              {/* Footer */}
-              <footer className={classNames(classes.footer, classes.layout)}>
-                <Grid container spacing={32} justify="space-evenly">
-                  {footers.map(footer => (
-                    <Grid item xs key={footer.title}>
-                      <Typography variant="h6" color="textPrimary" gutterBottom>
-                        {footer.title}
-                      </Typography>
-                      {footer.description.map(item => (
-                        <Typography key={item} variant="subtitle1" color="textSecondary">
-                          {item}
+                {/* Footer */}
+                <footer className={classNames(classes.footer, classes.layout)}>
+                  <Grid style={{ marginLeft: 30 }} container spacing={32} justify="space-evenly">
+                    {footers.map(footer => (
+                      <Grid item xs key={footer.title}>
+                        <Typography variant="h6" color="textPrimary" gutterBottom>
+                          {footer.title}
                         </Typography>
-                      ))}
-                    </Grid>
-                  ))}
-                </Grid>
-              </footer>
-              {/* End footer */}
+                        {footer.description.map(item => (
+                          <Typography key={item} variant="subtitle1" color="textSecondary">
+                            {item}
+                          </Typography>
+                        ))}
+                      </Grid>
+                    ))}
+                  </Grid>
+                </footer>
+                {/* End footer */}
             </div>
           </BrowserRouter>
         </React.Fragment>
       </MuiPickersUtilsProvider>
-    );
-  }
-}
-
+        );
+      }
+    }
+    
 Pricing.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
+          classes: PropTypes.object.isRequired,
+      };
+      
 export default withStyles(styles)(Pricing);
