@@ -217,8 +217,8 @@ class Pricing extends React.Component {
                       <Button style={{ marginRight: 50, color: "#FFFFFF" }} >Documentation</Button>
                     </Link>
 
-                    <Link style={{ textDecoration: "none" }} to="/faq">
-                      <Button style={{ marginRight: 50, color: "#FFFFFF" }} >FAQ's</Button>
+                    <Link style={{ textDecoration: "none" }} to="/about">
+                      <Button style={{ marginRight: 50, color: "#FFFFFF" }} >About Us</Button>
                     </Link>
 
                     <Button style={{ marginRight: 50, color: "#FFFFFF" }} onClick={this.handleOpen}>Contact Us</Button>
@@ -243,7 +243,7 @@ class Pricing extends React.Component {
 
                 <main className={classes.layout}>
 
-                  <main className={classes.content} style={{ marginTop: 60 }}>
+                  <main className={classes.content} style={{ marginTop: 20 }}>
                     <Switch>
                       <Route path="/home" component={Home} />
                       <Route path="/submit" component={request} />

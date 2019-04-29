@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { DatePicker } from 'material-ui-pickers';
 import { format } from 'date-fns';
 import Button from '@material-ui/core/Button';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 export class request extends React.Component {
     state = {
@@ -103,7 +104,7 @@ export class request extends React.Component {
 
                 <Divider style={{ marginBottom: 20 }} />
 
-                <form style={{ maxWidth: 900, margin: "auto" }} enctype="multipart/form-data" onSubmit={this.submit}>
+                <ValidatorForm style={{ maxWidth: 900, margin: "auto" }} enctype="multipart/form-data" onSubmit={this.submit}>
                     {config.map((el, i) => {
                         switch (el.type) {
                             case "date":
@@ -133,11 +134,13 @@ export class request extends React.Component {
                                     </RadioGroup>
                                 </FormControl>
                             default:
-                                return <TextField key={i}
+                                return <TextValidator key={i}
                                     style={{ display: "flex", marginBottom: 20 }}
                                     label={el.label}
                                     name={el.name}
                                     value={this.state.values[el.name]}
+                                    validators={['required', 'minStringLength:3']}
+                                    errorMessages={["Value is required.", "Mandatory Field"]}
                                     onChange={this.onChange(el.name)}
                                     type={el.type ? el.type : "text"}
                                 />;
@@ -465,7 +468,7 @@ export class request extends React.Component {
                         Revised: April 09, 2019<br />
                     </Typography>
 
-                </form>
+                </ValidatorForm>
 
             </CardContent>
         </Card>

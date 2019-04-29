@@ -8,6 +8,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import AliceCarousel from 'react-alice-carousel';
+import "react-alice-carousel/lib/alice-carousel.css";
+import Logo from './logo.png';
 
 const styles = theme => ({
   '@global': {
@@ -82,66 +85,70 @@ const tiers = [
 ];
 
 export class Home extends React.Component {
-    
-    render() {
-  
-        const { classes } = this.props;
-  
-        return (
-                <div style={{ textAlign: "center" }}>
-                <main className={classes.layout}>
-                    {/* Hero unit */}
-                    <div className={classes.heroContent}>
-                        <Typography variant="h6" align="center" color="textPrimary" component="p">
-                            Quickly build an effective pricing table for your potential customers with this layout.
-                            It&apos;s built with default Material-UI components with little customization.
-                        </Typography>
-                    </div>
-                    <div style={{margin: 'auto', align: 'center'}}>
-                    {/* End hero unit */}
-                    <Grid container spacing={40} alignItems="flex-end">
-                        {tiers.map(tier => (
-                            // Enterprise card is full width at sm breakpoint
-                            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
-                                <Card>
-                                    <CardHeader
-                                        title={tier.title}
-                                        subheader={tier.subheader}
-                                        titleTypographyProps={{ align: 'center' }}
-                                        subheaderTypographyProps={{ align: 'center' }}
-                                        className={classes.cardHeader}
-                                        
-                                    />
-                                    <CardContent>
-                                        {tier.description.map(line => (
-                                            <Typography variant="subtitle1" align="center" key={line}>
-                                                {line}
-                                            </Typography>
-                                        ))}
-                                    </CardContent>
-                                    <CardActions className={classes.cardActions}>
-                                        <Button fullWidth variant={tier.buttonVariant} style={{ backgroundColor: tier.buttonColor, color: tier.textColor }}>
-                                            {tier.buttonText}
-                                        </Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                    </div>
-                </main>
 
-                <Typography style={{ marginTop: 50 }} variant='p' align="center">
-                    For questions or comments about this site<br />
-                    contact <a href="mailto:rajeshwar.akella@adp.com?Subject=Website%20Feedback" target="_top">Custom Majors</a>
-                </Typography>
-            </div>
-        )
-    }
+  render() {
+
+    const { classes } = this.props;
+
+    return (
+      <div style={{ textAlign: "center" }}>
+        <main className={classes.layout}>
+
+          <AliceCarousel fadeOutAnimation={true} autoPlay={true} autoPlayInterval={2000} stopAutoPlayOnHover={true}
+            infinite={true} buttonsDisabled={true}>
+            <img src={Logo} alt={' '} width='900' height='250'/>
+            <img src={Logo} alt={' '} width='900' height='250'/>
+            <img src={Logo} alt={' '} width='900' height='250'/>
+            <img src={Logo} alt={' '} width='900' height='250'/>
+            <img src={Logo} alt={' '} width='900' height='250'/>
+            <img src={Logo} alt={' '} width='900' height='250'/>
+          </AliceCarousel>
+
+          <div style={{ margin: 'auto', align: 'center' }}>
+            {/* End hero unit */}
+            <Grid container spacing={40} alignItems="flex-end">
+              {tiers.map(tier => (
+                // Enterprise card is full width at sm breakpoint
+                <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
+                  <Card>
+                    <CardHeader
+                      title={tier.title}
+                      subheader={tier.subheader}
+                      titleTypographyProps={{ align: 'center' }}
+                      subheaderTypographyProps={{ align: 'center' }}
+                      className={classes.cardHeader}
+
+                    />
+                    <CardContent>
+                      {tier.description.map(line => (
+                        <Typography variant="subtitle1" align="center" key={line}>
+                          {line}
+                        </Typography>
+                      ))}
+                    </CardContent>
+                    <CardActions className={classes.cardActions}>
+                      <Button fullWidth variant={tier.buttonVariant} style={{ backgroundColor: tier.buttonColor, color: tier.textColor }}>
+                        {tier.buttonText}
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        </main>
+
+        <Typography style={{ marginTop: 50 }} variant='p' align="center">
+          For questions or comments about this site<br />
+          contact <a href="mailto:rajeshwar.akella@adp.com?Subject=Website%20Feedback" target="_top">Custom Majors</a>
+        </Typography>
+      </div>
+    )
+  }
 }
 
 Home.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-  
+  classes: PropTypes.object.isRequired,
+};
+
 export default withStyles(styles)(Home);
