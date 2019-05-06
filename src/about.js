@@ -7,25 +7,18 @@ import john from './john.jpg';
 import Lori from './Lori.jpg';
 import sireesha from './sireesha.jpg';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 export class about extends React.Component {
     render(){
 
     return (
-      <div>
+      <div style={{textAlign: 'center'}}>
       <div> 
-        <Grid container spacing={24}>
-      <Grid item xs={4}>
-                    </Grid>
-            <Grid item xs={4}>
-        <Typography  variant="h8" align="center">
-              <b>Meet CUSTOM MAJORS Team</b>
-            </Typography>
-            
-            </Grid>
-            <Grid item xs={4}>
-                   </Grid>
-   </Grid>
+      <Card style={{ padding: 10, margin: "auto", maxWidth: 950 }}>
+        <CardContent>
+
       <Grid container spacing={24}>
         <Grid item xs={3}>
         <Flippy
@@ -35,7 +28,7 @@ export class about extends React.Component {
     ref={(r) => this.flippy = r} // to use toggle method like this.flippy.toggle()
     // if you pass isFlipped prop component will be controlled component.
     // and other props, which will go to div
-    style={{ width: '200px', height: '470px'}} /// these are optional style, it is not necessary
+    // style={{ width: '200px', height: '470px'}} /// these are optional style, it is not necessary
   >
     <FrontSide
       style={{backgroundColor: '#FFFFFF', width: '200px', height: '300px' }}
@@ -166,6 +159,9 @@ export class about extends React.Component {
   </Grid>
   
   </Grid>
+
+    </CardContent>
+    </Card>
     </div>
     
     </div>

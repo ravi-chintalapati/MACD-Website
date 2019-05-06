@@ -36,3 +36,7 @@
 .form-adp > * {
   flex-grow: 1;
 }
+
+.hoverable:hover {
+  box-shadow: 0px 0px 10px #838383;
+}

@@ -10,12 +10,14 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Logo from './logo.png';
 import { request } from './custom-request';
+import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Home from './home';
 import { Album } from './Album';
 import { documentation } from './documentation';
 import { faq } from './faq';
 import { about } from './about';
+import { workFlow } from './workflow';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import SearchIcon from '@material-ui/icons/Search';
@@ -45,7 +47,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(900 + theme.spacing.unit * 3 * 2)]: {
-      width: 900,
+      width: 1200,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -243,7 +245,7 @@ class Pricing extends React.Component {
 
                 <main className={classes.layout}>
 
-                  <main className={classes.content} style={{ marginTop: 20 }}>
+                  <main className={classes.content} style={{ marginTop: 25 ,maxWidth: 1200}}>
                     <Switch>
                       <Route path="/home" component={Home} />
                       <Route path="/submit" component={request} />
@@ -251,6 +253,7 @@ class Pricing extends React.Component {
                       <Route path="/faq" component={faq} />
                       <Route path="/about" component={about} />
                       <Route path="/album" component={Album} />
+                      <Route path="/workflow" component={workFlow} />
                       <Route component={Home} />
                     </Switch>
                   </main>
@@ -297,7 +300,7 @@ class Pricing extends React.Component {
                 </Dialog>
 
                 {/* Footer */}
-                <footer className={classNames(classes.footer, classes.layout)}>
+                <footer className={classNames(classes.footer)} style={{maxWidth: 900, marginLeft: 'auto', marginRight: 'auto'}}>
                   <Grid style={{ marginLeft: 30 }} container spacing={32} justify="space-evenly">
                     {footers.map(footer => (
                       <Grid item xs key={footer.title}>
