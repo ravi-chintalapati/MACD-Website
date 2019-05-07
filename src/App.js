@@ -13,6 +13,7 @@ import { request } from './custom-request';
 import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Home from './home';
+import {cal} from './cal';
 import { Album } from './Album';
 import { documentation } from './documentation';
 import { faq } from './faq';
@@ -75,6 +76,8 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 8,
     borderTop: `1px solid ${theme.palette.divider}`,
     padding: `${theme.spacing.unit * 6}px 0`,
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
 
   root: {
@@ -139,20 +142,16 @@ const styles = theme => ({
 
 const footers = [
   {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
+    title: 'Custom Majors',
+    description: [{name: 'Team', link: '/about', type: 'static'}, {name: 'Contact us', link: "", type: 'static'}],
   },
   {
-    title: 'Features',
-    description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
+    title: 'Quick Links',
+    description: [{name: 'Customisations', link: '/custChecks', type: 'static'}, {name: 'Developer stuff', link: '/developer', type: 'static'}, {name: 'Custom Request', link: '/submit', type: 'static'}],
   },
   {
     title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
+    description: [{name: 'Privacy policy', link: 'https://www.adp.com/privacy/?ln=en_en', type: 'dynamic'}, {name: 'Legal', link: 'https://www.adp.com/legal.aspx', type: 'dynamic'}],
   },
 ];
 
@@ -167,6 +166,7 @@ class Pricing extends React.Component {
   }
 
   componentDidMount() {
+    // fetch("https://rally1.rallydev.com/slm/webservice/v2.0/hierarchicalrequirement?query=((%20Project.ObjectID%20=%2034860283988%20)%20AND%20(ScheduleState%20=%20Backlog%20))&fetch=FormattedID,Name&pagesize=1000").then(d=>d.json()).then(console.log).catch(console.error)
     fetch("http://localhost:8888/kishore").then(d => d.text()).then(d => console.log(d));
   }
 
@@ -254,6 +254,7 @@ class Pricing extends React.Component {
                       <Route path="/about" component={about} />
                       <Route path="/album" component={Album} />
                       <Route path="/workflow" component={workFlow} />
+                      <Route path="/cal" component={cal} />
                       <Route component={Home} />
                     </Switch>
                   </main>
@@ -300,18 +301,28 @@ class Pricing extends React.Component {
                 </Dialog>
 
                 {/* Footer */}
-                <footer className={classNames(classes.footer)} style={{maxWidth: 900, marginLeft: 'auto', marginRight: 'auto'}}>
-                  <Grid style={{ marginLeft: 30 }} container spacing={32} justify="space-evenly">
+                <footer className={classNames(classes.footer)} style={{maxWidth: 800, marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}>
+                  <Grid container spacing={32} justify="space-evenly">
                     {footers.map(footer => (
                       <Grid item xs key={footer.title}>
                         <Typography variant="h6" color="textPrimary" gutterBottom>
                           {footer.title}
                         </Typography>
-                        {footer.description.map(item => (
-                          <Typography key={item} variant="subtitle1" color="textSecondary">
-                            {item}
-                          </Typography>
-                        ))}
+                        {footer.description.map((item, i) => {
+                          switch (item.type) { 
+                            case 'dynamic':
+                              return <a key={i} href={item.link} target="_blank" style={{ color: '#FFFFFF', textDecoration: "none" }}>
+                                    <Typography variant="subtitle1" color="textSecondary">
+                                      {item.name}
+                                    </Typography>
+                                    </a>
+                            case 'static':
+                              return  <Link key={i} to={item.link}><Typography variant="subtitle1" color="textSecondary">
+                                        {item.name}
+                                        </Typography>
+                                      </Link>
+                          }
+                        })}
                       </Grid>
                     ))}
                   </Grid>

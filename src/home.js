@@ -63,24 +63,16 @@ const tiers = [
   {
     title: 'Work Flow',
     description: ['Request Lifecyle', 'Defect Lifecycle', 'What we Do'],
-    buttonText: 'Know more',
-    buttonVariant: 'outlined',
-    link: "/workflow"
+    link: '/workflow',
   },
   {
     title: 'Important Links',
     subheader: '    ',
     description: ['Track your Request', 'Request a Custom', 'Raise a Defect'],
-    buttonText: 'Know More',
-    buttonVariant: 'contained',
-    buttonColor: '#2a6171',
-    textColor: "#FFFFFF",
   },
   {
     title: 'Request Status',
     description: ['Requests in Progress', 'Requests in Backlog', 'Blocked Requests'],
-    buttonText: 'Know More',
-    buttonVariant: 'outlined',
   },
 ];
 
@@ -107,8 +99,8 @@ export class Home extends React.Component {
               {tiers.map(tier => (
                 // Enterprise card is full width at sm breakpoint
                 <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
-                  {/* <Link to={tier.link} style={{textDecoration: "none"}}> */}
-                  {/* <Card className="hoverable"> */}
+                  
+                  <Card className="hoverable">
                     <CardHeader
                       title={tier.title}
                       subheader={tier.subheader}
@@ -119,14 +111,13 @@ export class Home extends React.Component {
                     <CardContent>
                       {tier.description.map(line => (
                         <Link to={tier.link} style={{textDecoration: "none"}}>
-                        <Card className="hoverable">
                         <Typography variant="subtitle1" align="center" key={line}>
                           {line}
                         </Typography>
-                        </Card>
                         </Link>
                       ))}
                     </CardContent>
+                    </Card>
                 </Grid>
               ))}
             </Grid>

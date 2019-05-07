@@ -103,10 +103,10 @@ export class about extends React.Component {
     >
     <img src={sireesha} height={'175px'} width={'170px'} borderRadius={"50%"} overflow={"hidden"} alt={' '} />
            <Typography  variant="h8" align="center">
-              <b>SIREESHA S</b>
+              <b>Sireesha S</b>
             </Typography>
             <Typography  variant="h8" align="center">
-            VP-Product Development
+            Scrum Master
             </Typography>
     </FrontSide>
     <BackSide
@@ -115,10 +115,10 @@ export class about extends React.Component {
               <b>SIREESHA S</b>
             </Typography>
             <Typography fontStyle="italic" variant="h9" align="center">
-              <b>VP-Product Development</b>
+              <b>Scrum Master</b>
             </Typography>
             <br/>
-            AutoPay Development Leader leading awesome teams of very talented people both in the US and India to ensure the AutoPay system remains up-to-date, compliant, and resilient. Areas of responsibility include the Edit, Net/Calc, Statutory, PTCS, Custom Majors, EMP Utilities, and BI Teams.
+            As Scrum Master for Custom Majors Team, works with Sales, Service and Regional Teams to understand the requirements and work with the Development teams to fulfill the requirements. Also works on solutions where Technology enables and drives Business results for our clients.
     </BackSide>
   </Flippy>
   </Grid>
@@ -145,7 +145,7 @@ export class about extends React.Component {
             </Typography>
     </FrontSide>
     <BackSide
-      style={{ backgroundColor: '#FFFFFF',width: '200px', height: '440px',overflow: 'hidden'}}>
+      style={{ backgroundColor: '#FFFFFF',width: '200px', height: '370px',overflow: 'hidden'}}>
       <Typography  variant="h8" align="center">
               <b>Rajeshwar Akella</b>
             </Typography>
@@ -153,7 +153,7 @@ export class about extends React.Component {
               <b>Developer</b>
             </Typography>
             <br/>
-            AutoPay Development Leader leading awesome teams of very talented people both in the US and India to ensure the AutoPay system remains up-to-date, compliant, and resilient. Areas of responsibility include the Edit, Net/Calc, Statutory, PTCS, Custom Majors, EMP Utilities, and BI Teams.
+            As Developer for Custom Majors Team works on requirements gathering, key role in the design, deployments, testing and maintenance of Custom Majors. Plays a key role to help businesses to be more efficient and provide a better service.
     </BackSide>
   </Flippy>
   </Grid>

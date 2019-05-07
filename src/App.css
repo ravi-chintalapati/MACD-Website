@@ -40,3 +40,11 @@
 .hoverable:hover {
   box-shadow: 0px 0px 10px #838383;
 }
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: black; 
+  /* text-decoration: underline; */
+}
