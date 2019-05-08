@@ -18,6 +18,10 @@ import { Album } from './Album';
 import { documentation } from './documentation';
 import { faq } from './faq';
 import { about } from './about';
+import { mission } from './mission';
+import { bannerdata } from './bannerdata';
+import { bannerdata2 } from './bannerdata2';
+import { sample } from './sample';
 import { workFlow } from './workflow';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
@@ -214,10 +218,18 @@ class Pricing extends React.Component {
                       <a href="http://dpopsweb/Main/CA/CreateRequestNoTabs.aspx?pcat=1319AC4" target="_blank" rel="noopener noreferrer" style={{ color: '#FFFFFF', textDecoration: "none" }}>
                         Raise a Defect</a>
                     </Button>
+                    <Button style={{ marginRight: 50, color: "#FFFFFF" }} >
+                      <a href="http://apps.adpcorp.com/Sites/AutoPayDev-Teams/AP%20Custom%20Majors/Forms/AllItems.aspx " target="_blank" rel="noopener noreferrer" style={{ color: '#FFFFFF', textDecoration: "none" }}>
+                      Documentation </a>
+                    </Button>
 
-                    <Link style={{ textDecoration: "none" }} to="/documentation">
+                    {/* <Link style={{ textDecoration: "none" }} to="/documentation">
                       <Button style={{ marginRight: 50, color: "#FFFFFF" }} >Documentation</Button>
+                    </Link> */}
+                    <Link style={{ textDecoration: "none" }} to="/mission">
+                      <Button style={{ marginRight: 50, color: "#FFFFFF" }} >Vision & Mission</Button>
                     </Link>
+
 
                     <Link style={{ textDecoration: "none" }} to="/about">
                       <Button style={{ marginRight: 50, color: "#FFFFFF" }} >About Us</Button>
@@ -252,6 +264,10 @@ class Pricing extends React.Component {
                       <Route path="/documentation" component={documentation} />
                       <Route path="/faq" component={faq} />
                       <Route path="/about" component={about} />
+                      <Route path="/mission" component={mission} />
+                      <Route path="/bannerdata" component={bannerdata} />
+                      <Route path="/bannerdata2" component={bannerdata2} />
+                      <Route path="/sample" component={sample} />
                       <Route path="/album" component={Album} />
                       <Route path="/workflow" component={workFlow} />
                       <Route path="/cal" component={cal} />
@@ -275,20 +291,33 @@ class Pricing extends React.Component {
                     <DialogContentText id="alert-dialog-slide-description">
                       <div>
                         <table>
-                          <col width="200" />
-                          <col width="200" />
+                          <col width="400" />
+                          <col width="400" />
                           <tr>
-                            <td>Lori Coleli</td>
-                            <td>Sireesha Somayajula</td>
+                            <td>Roseland, NJ, USA:</td>
+                            <td>Lori Colelli  </td>
                           </tr>
                           <tr>
-                            <td>Senior Director</td>
-                            <td>Senior Manager</td>
+                            <td></td>
+                            <td>email@ Lori.Colelli@adp.com </td>
                           </tr>
                           <tr>
-                            <td>NJ, Roseland</td>
-                            <td>F9, Hyderabad</td>
+                            <td></td>
+                            <td>Work  +1 973-974-2337</td>
                           </tr>
+                          <tr>
+                            <td>Hyderabad, India:</td>
+                            <td>Sireesha Somayajula </td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>email@ Sireesha.Somayajula@adp.com</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>  Work   +91 770-299-2346 </td>
+                          </tr>
+                          
                         </table>
                       </div>
                     </DialogContentText>

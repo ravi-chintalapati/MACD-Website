@@ -9,11 +9,10 @@ import { Link } from 'react-router-dom';
 import { workFlow } from './workflow';
 import { withStyles } from '@material-ui/core/styles';
 import AliceCarousel from 'react-alice-carousel';
+import responsive from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 import Banner1 from './Banner1.png';
 import Banner2 from './Banner2.jpg';
-import Banner3 from './Banner3.jpg';
-import {Filemanager} from './Filemanager'
 
 const styles = theme => ({
   '@global': {
@@ -61,18 +60,18 @@ const styles = theme => ({
 
 const tiers = [
   {
-    title: 'Work Flow',
-    description: ['Request Lifecyle', 'Defect Lifecycle', 'What we Do'],
+    title: 'What We Do',
+    description: ['Customize Payrolls', 'Payroll Features Support', 'Talent Development'],
     link: '/workflow',
   },
   {
-    title: 'Important Links',
+    title: 'How We Do',
     subheader: '    ',
-    description: ['Track your Request', 'Request a Custom', 'Raise a Defect'],
+    description: ['Request Life Cycle', 'Defect Life Cycle', 'Patch / Release Calendar '],
   },
   {
-    title: 'Request Status',
-    description: ['Requests in Progress', 'Requests in Backlog', 'Blocked Requests'],
+    title: 'Help Needed',
+    description: ['Submit a New Request', 'Submit a Defect', 'Track Your Request'],
   },
 ];
 
@@ -85,14 +84,23 @@ export class Home extends React.Component {
     return (
       <div style={{ textAlign: "center"}}>
         <main className={classes.layout}>
-
-          <AliceCarousel fadeOutAnimation={true} autoPlay={true} autoPlayInterval={4500} stopAutoPlayOnHover={true}
-            infinite={true} buttonsDisabled={true}>
-            <img src={Banner1} alt={' '} width='1000' height='250'/>
+        {/* <Link style={{ textDecoration: "none" }} to="/bannerdata"> */}
+             <link></link>         
+                   
+          <AliceCarousel fadeOutAnimation={true} autoPlay={true} autoPlayInterval={3000} stopAutoPlayOnHover={true}
+            infinite={true} buttonsDisabled={true}  responsive={responsive}> 
+             <Link style={{ textDecoration: "none" }} to="/bannerdata">
+            <img src={Banner1} alt={' '} width='1000' height='250' />
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/bannerdata2">
             <img src={Banner2} alt={' '} width='1000' height='250'/>
+            </Link>
+            {/* <Link style={{ textDecoration: "none" }} to="/home">
             <img src={Banner3} alt={' '} width='1000' height='250'/>
+            </Link> */}
+            
             </AliceCarousel>
-
+            {/* </Link> */}
           <div style={{paddingRight: 140, paddingLeft: 140, margin: 'auto', align: 'center',marginTop: 25 }}>
             {/* End hero unit */}
             <Grid container spacing={40} alignItems="flex-end">
